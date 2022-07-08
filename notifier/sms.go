@@ -31,7 +31,7 @@ func SendSms(notification model.Notification, defaultMobiles string) (err error)
 
 	req, err := http.NewRequest(
 		"POST",
-		"http://112.35.1.155:1992/sms/norsubmit",
+		"http://xxx.35.1.xxx:xx/sms/norsubmit",
 		bytes.NewBufferString(sEnc))
 
 	if err != nil {

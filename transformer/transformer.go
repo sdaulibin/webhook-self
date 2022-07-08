@@ -11,10 +11,10 @@ import (
 )
 
 const (
-	EcName    = "青岛海信网络科技股份有限公司。"
-	Sign      = "repuqKQHO"
-	ApId      = "hsjcdx"
-	SecretKey = "Hxzwy@2022"
+	EcName    = "xxxxxx科技股份有限公司。"
+	Sign      = "xxxx"
+	ApId      = "xxxx"
+	SecretKey = "xxxx"
 )
 
 func TransformToSms(notification model.Notification, defaultMobiles string) (smsMessage *model.SmsMessage, err error) {
@@ -36,7 +36,7 @@ func TransformToSms(notification model.Notification, defaultMobiles string) (sms
 	fmt.Println("组装前:", buffer.String())
 
 	if defaultMobiles == "" {
-		defaultMobiles = "13705328368,15063049112,15621757755,13210002670,15553208391"
+		defaultMobiles = "x,x,x,x,x"
 	}
 
 	smsMessage = &model.SmsMessage{
@@ -61,7 +61,7 @@ func TransformToMarkdown(notification model.Notification) (markdown *model.DingT
 	// annotations := notification.CommonAnnotations
 	// robotURL = annotations["dingtalkRobot"]
 	// robotURL = "https://oapi.dingtalk.com/robot/send?access_token=208a84e6e1d3e854ac55f106362949ff7cd791a7c5cbc92a6f6fc81e915cb764"
-	robotURL = "https://oapi.dingtalk.com/robot/send?access_token=aac61d1963a5a2905da220c21cb047b47445fd9a33a1cb0c1b49cde193588664"
+	robotURL = "https://oapi.xxxx.com/robot/send?access_token=xxxx3a5a2905da220c21cb047b47445fd9a33a1cb0c1b49cde193588664"
 	var buffer bytes.Buffer
 
 	buffer.WriteString(fmt.Sprintf("###核酸检测 通知组%s(当前状态:%s) \n", groupKey, status))
