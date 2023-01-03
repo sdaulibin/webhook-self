@@ -31,10 +31,10 @@ func TransformToSms(notification model.Notification, defaultMobiles string) (sms
 	for _, alert := range notification.Alerts {
 		annotations := alert.Annotations
 		buffer.WriteString(fmt.Sprintf("##### %s\n > %s\n", annotations["summary"], annotations["description"]))
-		buffer.WriteString(fmt.Sprintf("\n> 开始时间：%s\n", alert.StartsAt.Format("15:04:05")))
+		buffer.WriteString(fmt.Sprintf("\n> 开始时间：%s\n", alert.StartsAt.Format("2021-10-09 15:04:05")))
 	}
 
-	fmt.Println("组装前:", buffer.String())
+	log.Println("组装前:", buffer.String())
 
 	if defaultMobiles == "" {
 		defaultMobiles = "x,x,x,x,x"
@@ -65,14 +65,14 @@ func TransformToMarkdown(notification model.Notification) (markdown *model.DingT
 	robotURL = "https://oapi.xxxx.com/robot/send?access_token=xxxx3a5a2905da220c21cb047b47445fd9a33a1cb0c1b49cde193588664"
 	var buffer bytes.Buffer
 
-	buffer.WriteString(fmt.Sprintf("###核酸检测 通知组%s(当前状态:%s) \n", groupKey, status))
+	buffer.WriteString(fmt.Sprintf("核酸检测 通知组：%s(当前状态:%s) \n", groupKey, status))
 
-	buffer.WriteString(fmt.Sprintf("#### 告警项:\n"))
+	buffer.WriteString(fmt.Sprintf("告警项:\n"))
 
 	for _, alert := range notification.Alerts {
 		annotations := alert.Annotations
-		buffer.WriteString(fmt.Sprintf("##### %s\n > %s\n", annotations["summary"], annotations["description"]))
-		buffer.WriteString(fmt.Sprintf("\n> 开始时间：%s\n", alert.StartsAt.Add(8*time.Hour).Format("2022-11-24 15:04:05")))
+		buffer.WriteString(fmt.Sprintf("%s\n > %s\n", annotations["summary"], annotations["description"]))
+		buffer.WriteString(fmt.Sprintf("> 开始时间：%s\n", alert.StartsAt.Add(8*time.Hour).Format("2022-11-24 15:04:05")))
 	}
 
 	log.Println("组装前:", buffer.String())

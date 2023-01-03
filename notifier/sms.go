@@ -56,7 +56,7 @@ func SendSms(notification model.Notification, defaultMobiles string) (err error)
 	return
 }
 
-// Send send markdown message to dingtalk
+// Send markdown message to dingtalk
 func Send(notification model.Notification, defaultRobot string) (err error) {
 
 	markdown, robotURL, err := transformer.TransformToMarkdown(notification)
