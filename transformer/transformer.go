@@ -18,6 +18,7 @@ const (
 	SecretKey = "xxxx"
 )
 
+// TransformToSms transform alertmanager notification to sms message
 func TransformToSms(notification model.Notification, defaultMobiles string) (smsMessage *model.SmsMessage, err error) {
 	groupKey := notification.GroupKey
 	status := notification.Status
@@ -54,7 +55,7 @@ func TransformToSms(notification model.Notification, defaultMobiles string) (sms
 	return
 }
 
-// TransformToMarkdown transform alertmanager notification to dingtalk markdow message
+// TransformToMarkdown transform alertmanager notification to dingtalk markdown message
 func TransformToMarkdown(notification model.Notification) (markdown *model.DingTalkMarkdown, robotURL string, err error) {
 
 	groupKey := notification.GroupKey
