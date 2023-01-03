@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"log"
+	"time"
 
 	"binginx.com/webhook/model"
 )
@@ -71,7 +72,7 @@ func TransformToMarkdown(notification model.Notification) (markdown *model.DingT
 	for _, alert := range notification.Alerts {
 		annotations := alert.Annotations
 		buffer.WriteString(fmt.Sprintf("##### %s\n > %s\n", annotations["summary"], annotations["description"]))
-		buffer.WriteString(fmt.Sprintf("\n> 开始时间：%s\n", alert.StartsAt.Format("15:04:05")))
+		buffer.WriteString(fmt.Sprintf("\n> 开始时间：%s\n", alert.StartsAt.Add(8*time.Hour).Format("2022-11-24 15:04:05")))
 	}
 
 	log.Println("组装前:", buffer.String())
