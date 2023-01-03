@@ -3,10 +3,8 @@ package main
 import (
 	"flag"
 	"log"
-	"net/http"
 
-	model "binginx.com/webhook/model"
-	"binginx.com/webhook/notifier"
+	"binginx.com/webhook/api"
 	"github.com/gin-gonic/gin"
 )
 
@@ -32,34 +30,8 @@ func main() {
 		return
 	}
 	router := gin.Default()
-	router.POST("/webhook/dingding", func(c *gin.Context) {
-		var notification model.Notification
-		err := c.BindJSON(&notification)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-		log.Println("notification:", notification)
-		err = notifier.Send(notification, defaultRobot)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		}
-		c.JSON(http.StatusOK, gin.H{"message": "send to dingtalk successful!"})
 
-	})
-	router.POST("/webhook/sms", func(c *gin.Context) {
-		var notification model.Notification
-		err := c.BindJSON(&notification)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-		log.Println("notification:", notification)
-		err = notifier.SendSms(notification, defaultMobiles)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		}
-		c.JSON(http.StatusOK, gin.H{"message": "send to sms successful!"})
-	})
+	router.POST("/webhook/dingding", api.Dingding)
+	router.POST("/webhook/sms", api.Sms)
 	router.Run(":8090")
 }
